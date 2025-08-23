@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    />
   </head>
   <body>
     <h1>Update Campground : -</h1>
@@ -11,24 +15,83 @@
     <form
       action="/campgrounds/updating.../<%=campground._id%>?_method=put"
       method="post"
+      novalidate
+      class="validate-form"
     >
-      <label for="name">Campground Name: </label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        value="<%=campground.name%>"
-      /><br />
-      <label for="location">Location: </label>
-      <input
-        value="<%=campground.name%>"
-        type="text"
-        id="location"
-        name="city"
-      />
-      <br />
+      <div>
+        <label for="name">Campground Name: </label>
+        <input
+          class="form-control"
+          type="text"
+          id="name"
+          name="name"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+
+      <div>
+        <label for="location">Location: </label>
+        <input
+          class="form-control"
+          type="text"
+          id="location"
+          name="city"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+
+      <div>
+        <label for="price">Price:</label>
+        <input
+          class="form-control"
+          type="number"
+          id="price"
+          name="price"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
       <button>Update</button>
     </form>
-    <a href="/campgrounds/<%=campground._id%>">Cancel</a>
+
+    <a href="/campgrounds">Back</a>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
+      integrity="sha384-7qAoOXltbVP82dhxHAUje59V5r2YsVfBafyUDxEdApLPmcdhBPg1DKg1ERo0BZlK"
+      crossorigin="anonymous"
+    ></script>
   </body>
+
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+      "use strict";
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      const forms = document.querySelectorAll(".validate-form");
+
+      // Loop over them and prevent submission
+      Array.from(forms).forEach((form) => {
+        form.addEventListener(
+          "submit",
+          (event) => {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+
+            form.classList.add("was-validated");
+          },
+          false
+        );
+      });
+    })();
+  </script>
 </html>
