@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
+<%-include('../partials/bootstrap.ejs') %>
   <body>
+    <%-include('../partials/flash.ejs') %>
     <h1>All Campgrounds :-</h1>
     <ul>
       <% for(let campground of allCampgrounds){ %>
@@ -15,5 +10,7 @@
       <% } %>
     </ul>
     <a href="/campgrounds/addCampground">add campground</a>
+
+    <%-include('../partials/JavaScript.ejs') %>
   </body>
 </html>
