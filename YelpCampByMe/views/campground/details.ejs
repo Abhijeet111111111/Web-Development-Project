@@ -5,15 +5,20 @@
     <h1><%=campground.name%></h1>
     <h2><%=campground.city%></h2>
     <h3><%=campground.price%></h3>
-
+    <p>By <b><%=campground.author.username %></b></p>
+    <% if(currentUser && campground.author._id.equals(currentUser._id)) {%>
     <form
       action="/campgrounds/delete/<%=campground._id%>?_method=delete"
       method="post"
     >
       <button>Delete</button>
     </form>
-    <a href="/campgrounds">All Campgrounds</a>
     <a href="/campgrounds/edit/<%=campground._id%>">Edit</a>
+    <% } %>
+    <a href="/campgrounds">All Campgrounds</a>
+
+    
+    <% if(currentUser){ %>
     <form
       action="/campgrounds/<%=campground._id%>/review"
       method="post"
@@ -37,15 +42,21 @@
       </div>
       <button class="btn btn-success">submit</button>
     </form>
+    <% } %>
 
     <div>
       <% for(review of campground.reviews) {%>
         <p>Rating : <%=review.rating%></p>
         <p>Review : <%=review.review%></p>
+        <p>by <b><%=review.author.username%></b></p>
+        <% if(currentUser && review.author._id.equals(currentUser.id)){ %>
         <form action="/campgrounds/<%=campground._id%>/review/<%=review._id%>?_method=delete" method="post">
           <button>Delete</button>
         </form>
         <% } %>
+        <% } %>
+
+
     </div>
 
     

@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-const  cities  = require('./cities');
+const cities = require('./cities');
 const { descriptors, places } = require('./seedHelpers');
-const dbModel = require('../model/dbModel')
-const campgroundModel = dbModel.campgroundModel;
+const campgroundModel = require('../model/dbModel');
 
 mongoose.connect('mongodb://127.0.0.1:27017/YelpCamp');
 
@@ -16,9 +15,11 @@ const fillDb = async () => {
     await campgroundModel.deleteMany({});
     for (let i = 0; i < 50; i++) {
         let campName = makeAName();
-        // console.log(campName);
-        
-        let newCampground = new campgroundModel({ name: campName,city:cities[i].city });
+        let newCampground = new campgroundModel({
+            name: campName,
+            city: cities[i].city,
+            author: '68ad8bad70c2fe77216de7ac'
+        });
         await newCampground.save();
     }
 }
