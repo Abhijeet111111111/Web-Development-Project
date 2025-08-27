@@ -4,7 +4,7 @@ const { campgroundSchema } = require('../schemas.js')
 const catchAsync = require('../utility/catchAsync');
 const campgroundModel = require('../model/dbModel')
 const AppError = require('../utility/appError');
-
+const { isLoggedIn } = require('../authenticationMiddleware.js')
 
 
 const validateSchema = ((req, res, next) => {
@@ -27,7 +27,7 @@ router.get('/', catchAsync(async (req, res) => {
     res.render('campground/campgrounds', { allCampgrounds });
 }))
 
-router.get('/addCampground', (req, res) => {
+router.get('/addCampground', isLoggedIn, (req, res) => {
     res.render('campground/addCampground');
 })
 
@@ -37,7 +37,7 @@ router.put('/updating.../:id', validateSchema, catchAsync(async (req, res) => {
     res.redirect(`/campgrounds/${req.params.id}`);
 }))
 
-router.get('/edit/:id', catchAsync(async (req, res) => {
+router.get('/edit/:id', isLoggedIn, catchAsync(async (req, res) => {
     const campground = await campgroundModel.findById(req.params.id);
     if (!campground) {
         req.flash('error', 'cannot find campground');

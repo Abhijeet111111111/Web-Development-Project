@@ -1,0 +1,41 @@
+<%-include('../partials/bootstrap') %>
+
+<body>
+    <%-include('../partials/flash') %>
+
+    <h1>Login</h1>
+
+    <form action="/login" method="post" novalidate class="validate-form">
+
+    <div>
+        <label for="username">Username : </label>
+        <input
+          class="form-control"
+          type="text"
+          id="username"
+          name="username"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+
+        <div>
+        <label for="password">password: </label>
+        <input
+          class="form-control"
+          type="password"
+          id="password"
+          name="password"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+        </div>
+        <button class="btn btn-success">Login</button>
+
+  </form>
+
+
+    <%-include('../partials/javaScript') %>
+    <%-include('../partials/validateForm')%>
+</body>
+
+</html>

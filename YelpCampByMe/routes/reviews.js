@@ -36,4 +36,6 @@ router.delete('/:id/review/:reviewId', catchAsync(async (req, res) => {
     res.redirect(`/campgrounds/${id}`);
 }))
 
+
+
 module.exports = router;

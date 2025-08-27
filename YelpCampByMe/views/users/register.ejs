@@ -1,0 +1,50 @@
+<%-include('../partials/bootstrap') %>
+<body>
+  <h1>Register!</h1>
+  <%-include('../partials/flash') %>
+
+  <form action="/register" method="post" novalidate class="validate-form">
+
+    <div>
+        <label for="username">Username : </label>
+        <input
+          class="form-control"
+          type="text"
+          id="username"
+          name="username"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+
+        <div>
+        <label for="email">email: </label>
+        <input
+          class="form-control"
+          type="text"
+          id="email"
+          name="email"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+        </div>
+
+        <div>
+        <label for="password">password: </label>
+        <input
+          class="form-control"
+          type="password"
+          id="password"
+          name="password"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+        </div>
+        <button class="btn btn-success">Register</button>
+
+  </form>
+
+
+  <%-include('../partials/javaScript') %>
+  <%-include('../partials/validateForm')%>
+</body>
+</html>
