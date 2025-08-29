@@ -1,13 +1,15 @@
 <%-include('../partials/bootstrap.ejs') %>
   <body>
     <%-include('../layouts/navbar')%>
+   
     <h1>Update Campground : -</h1>
-
+     <%-include('../partials/flash')%>
     <form
-      action="/campgrounds/updating.../<%=campground._id%>?_method=put"
+      action="/campgrounds/edit/<%=campground._id%>?_method=put"
       method="post"
       novalidate
       class="validate-form"
+      enctype="multipart/form-data"
     >
       <div>
         <label for="name">Campground Name: </label>
@@ -47,6 +49,21 @@
         />
         <div class="valid-feedback">Looks good!</div>
       </div>
+      <div class="input-group mb-3">
+      <input type="file" class="form-control" id="inputGroupFile02" name="image" multiple>
+      <label class="input-group-text" for="inputGroupFile02">Upload</label>
+    </div>
+
+    <% campground.images.map((img,i)=>{ %>
+      <div>
+      <img src="<%=img.thumbnail%>" class="img-thumbnail" alt="">
+      <input value="<%=img.filename%>" type="checkbox" name="deleteImages[]" id="delete-<%=i%>" class="form-check-input">
+      <label for="delete-<%=i%>" class="form-check-label">Delete?</label>
+      </div>
+      <% }) %>
+    
+
+
       <button>Update</button>
     </form>
 

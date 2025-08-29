@@ -10,11 +10,21 @@ const User = require('./user');
 //         console.log(err);
 //     })
 
+const imageSchema = new mongoose.Schema({
+    url: String,
+    filename: String
+})
+
+imageSchema.virtual('thumbnail').get(function () { // by doing this we are requesting cloudinary , images of 300 pixles under thumbnail
+    return this.url.replace('/upload', '/upload/w_200');
+})
+
 const campgroundSchema = new mongoose.Schema({
     name: String,
     price: Number,
     city: String,
     description: String,
+    images: [imageSchema],
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

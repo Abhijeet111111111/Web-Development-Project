@@ -12,7 +12,7 @@ module.exports.isLoggedIn = (req, res, next) => {
     }
     next();
 }
-module.exports.containUrl = (req, res, next) => {
+module.exports.containUrl = (req, res, next) => { // this middleware stores previousUrl , because logging in clears the session
     if (req.session.returnTo) {
         res.locals.returnTo = req.session.returnTo;
         res.locals.returnToType = req.session.returnToType;

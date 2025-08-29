@@ -1,14 +1,22 @@
+if (process.env.NODE_ENV != 'production') {
+    require('dotenv').config();
+}
+
 const express = require('express');
 const app = express();
 const methodOverride = require('method-override')
 const mongoose = require('mongoose');
 const session = require('express-session')
 const flash = require('connect-flash');
+
+
 const path = require('path')
 const AppError = require('./utility/appError');
 const passport = require('passport');
 const passportLocal = require('passport-local');
 const User = require('./model/user')
+
+
 
 const reviewRoutes = require('./routes/reviews')
 const campgroundRoutes = require('./routes/campground')
@@ -46,7 +54,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-    
+
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');

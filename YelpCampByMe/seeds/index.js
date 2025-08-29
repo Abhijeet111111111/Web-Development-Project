@@ -18,7 +18,17 @@ const fillDb = async () => {
         let newCampground = new campgroundModel({
             name: campName,
             city: cities[i].city,
-            author: '68ad8bad70c2fe77216de7ac'
+            author: '68ad8bad70c2fe77216de7ac',
+            images: [
+                {
+                    url: 'https://res.cloudinary.com/dijnr4wfy/image/upload/v1756437520/YelpCamp/zmhgpalxkucopxktf1uh.png',
+                    filename: 'YelpCamp/zmhgpalxkucopxktf1uh',
+                },
+                {
+                    url: 'https://res.cloudinary.com/dijnr4wfy/image/upload/v1756437522/YelpCamp/dyyfwwqzobhrtv9p2ogh.png',
+                    filename: 'YelpCamp/dyyfwwqzobhrtv9p2ogh',
+                }
+            ]
         });
         await newCampground.save();
     }
