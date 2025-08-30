@@ -1,5 +1,7 @@
 const campgroundModel = require('../model/dbModel')
 const { cloudinary } = require('../cloudinary') // !!!!!!!!
+const maptilerClient = require('@maptiler/client');
+maptilerClient.config.apiKey = process.env.MAPTILER_CLIENT_API_KEY;
 
 module.exports.index = async (req, res) => {
     let allCampgrounds;
@@ -61,12 +63,14 @@ module.exports.showCampground = async (req, res) => {
 }
 module.exports.makeNewCampground = async (req, res) => {
     // if (!req.body) throw new AppError('INVALID DATA', 400);
-    console.log(req.body, req.files);
-    const newCampground = await new campgroundModel(req.body);
+    const geoCode = await maptilerClient.geocoding.forward(req.body.city, {
+        limit: 1
+    })
+    const newCampground = new campgroundModel(req.body);
+    newCampground.geometry = geoCode.features[0].geometry;
     newCampground.author = req.user._id;
     newCampground.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
     await newCampground.save();
-    console.log(newCampground);
     req.flash('success', 'successfully made new campground!');
-    res.redirect(`/campgrounds/${newCampground._id}`);
+    res.rediresct(`/campgrounds/${newCampground._id}`);
 }

@@ -16,12 +16,23 @@ const imageSchema = new mongoose.Schema({
 })
 
 imageSchema.virtual('thumbnail').get(function () { // by doing this we are requesting cloudinary , images of 300 pixles under thumbnail
-    return this.url.replace('/upload', '/upload/w_200');
+    return this.url.replace('/upload', '/upload/w_100');
 })
 
 const campgroundSchema = new mongoose.Schema({
     name: String,
     price: Number,
+    geometry: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
+    },
     city: String,
     description: String,
     images: [imageSchema],
